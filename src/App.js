@@ -1,5 +1,7 @@
 import './App.css';
+import Switch from './switch'
 import { useState } from 'react';
+import { useTheme } from './ThemeContext';
   const PasswordErrorMessage =() => {
     return(
       <p className='FieldError'>
@@ -8,6 +10,7 @@ import { useState } from 'react';
     )}
   
 function App () {    
+  const {theme} = useTheme();
   function getIsFormValid() {
     return (
       firstName &&
@@ -42,10 +45,18 @@ function App () {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
     return (
-      <div className='App'>
+      <div 
+        className='App'
+        style={{
+          backgroundColor: theme === 'light' ? 'white' : '#121212',
+          color: theme === 'light' ? 'black' : 'white'
+        }}>
         <form onSubmit={handleSubmit}>
           <fieldset>
             <h2>Sign Up</h2>
+            <div className='toggle-switch'>
+              <Switch />
+            </div>
             <div className='field'>
               <label>First Name:<sup>* </sup>
               </label>
